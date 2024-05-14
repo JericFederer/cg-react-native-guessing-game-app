@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     textAlign: 'center',
+    fontFamily: 'space-mono-regular',
   },
   pressedForIOS: {
     opacity: 0.75,

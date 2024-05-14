@@ -12,12 +12,14 @@ export default Title;
 
 const styles = StyleSheet.create({
   title: {
-    fontWeight: 'bold',
+    fontFamily: 'space-mono-regular',
     fontSize: 32,
     color: Colors.appWhite,
     textAlign: 'center',
     borderWidth: 2,
     borderColor: Colors.appWhite,
     padding: 12,
+    maxWidth: '80%',
+    width: 300,
   }
 })
