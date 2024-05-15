@@ -3,7 +3,7 @@
     "name": "04-deep-dive-real-app-jeric",
     "slug": "04-deep-dive-real-app-jeric",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",

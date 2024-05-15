@@ -4,7 +4,6 @@ import { Colors } from '../../constants/Colors';
 
 // * HELPERS
 const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
 
 function NumberContainer({ children }) {
   return (

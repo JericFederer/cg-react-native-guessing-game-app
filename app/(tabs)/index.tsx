@@ -68,19 +68,22 @@ export default function App() {
   } //: IF
 
   return (
-    <LinearGradient colors={ [Colors.gradientTop, Colors.gradientBottom] } style={ styles.rootScreen }>
-      <ImageBackground
-        source={ require("../../assets/images/dice.png") }
-        resizeMode='cover'
-        style={ styles.rootScreen }
-        imageStyle={ styles.backgroundImage }
-      >
-        <SafeAreaView style={ styles.rootScreen }>
-          { screen }
-        </SafeAreaView>
-        
-      </ImageBackground>
-    </LinearGradient>
+    <>
+      <StatusBar style='inverted' />
+      <LinearGradient colors={ [Colors.gradientTop, Colors.gradientBottom] } style={ styles.rootScreen }>
+        <ImageBackground
+          source={ require("../../assets/images/dice.png") }
+          resizeMode='cover'
+          style={ styles.rootScreen }
+          imageStyle={ styles.backgroundImage }
+        >
+          <SafeAreaView style={ styles.rootScreen }>
+            { screen }
+          </SafeAreaView>
+          
+        </ImageBackground>
+      </LinearGradient>
+    </>
   );
 }
 

@@ -2,8 +2,9 @@ import {
   View,
   StyleSheet,
   Alert,
-  Text,
   FlatList,
+  ScrollView,
+  useWindowDimensions,
 } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -38,6 +39,7 @@ function GameScreen({ userNumber, onGameOver }) {
 
   // * HELPERS
   const guessRoundsListLength = guessRounds.length;
+  const { width, height } = useWindowDimensions();
   
   function nextGuessHandler(direction) {
     if (
@@ -82,11 +84,9 @@ function GameScreen({ userNumber, onGameOver }) {
     maxBoundary = 100;
   }, []);
 
-  return (
-    <View style={ styles.mainGameScreen }>
-      <Title>Opponent's Guess</Title>
+  let content = (
+    <>
       <NumberContainer>{ currentGuess }</NumberContainer>
-
       <Card>
         <InstructionText style={ styles.instructionText }>
           { 'Lower or Higher?' }
@@ -106,18 +106,50 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
+    </>
+  );
 
-      <View style={ styles.guessRoundList }>
-        <FlatList
-          data={ guessRounds }
-          renderItem={(itemData) => {
-            return <GuessLogItem roundNumber={ guessRoundsListLength - itemData.index } guess={ itemData.item } />
-          }}
-          keyExtractor={(item) => item}
-        />
+  if (width > 500) {
+    content = (
+      <>
+        <View style={ styles.buttonsContainerWide }>
+          <View style={ styles.buttonContainer }>
+            <PrimaryButton onPress={ nextGuessHandler.bind(this, 'lower') }>
+              <Ionicons name="remove" size={24} color={ Colors.white } />
+            </PrimaryButton>
+          </View>
+
+          <NumberContainer>{ currentGuess }</NumberContainer>
+
+          <View style={ styles.buttonContainer }>
+            <PrimaryButton onPress={ nextGuessHandler.bind(this, 'greater') }>
+              <Ionicons name="add-outline" size={24} color={ Colors.appWhite } />
+            </PrimaryButton>
+          </View>
+        </View>
+      </>
+    )
+  }
+
+  return (
+    <ScrollView style={ styles.screen }>
+      <View style={ styles.mainGameScreen }>
+        <Title>Opponent's Guess</Title>
+
+        { content }
+
+        <View style={ styles.guessRoundList }>
+          <FlatList
+            data={ guessRounds }
+            renderItem={(itemData) => {
+              return <GuessLogItem roundNumber={ guessRoundsListLength - itemData.index } guess={ itemData.item } />
+            }}
+            keyExtractor={(item) => item}
+          />
+        </View>
       </View>
-    </View>
-  )
+    </ScrollView>
+  );
 }
 
 export default GameScreen;
@@ -126,9 +158,14 @@ const styles = StyleSheet.create({
   mainGameScreen: {
     flex: 1,
     padding: 24,
+    alignItems: 'center',
   },
   instructionText: {
     marginBottom: 15,
+  },
+  buttonsContainerWide: {
+    flexDirection: 'row',
+    marginTop: '6%',
   },
   buttonsContainer: {
     flexDirection: 'row',
@@ -140,5 +177,8 @@ const styles = StyleSheet.create({
   guessRoundList: {
     flex: 1,
     padding: 16,
+  },
+  screen: {
+    flex: 1,
   }
 })
